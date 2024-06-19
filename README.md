@@ -2,7 +2,7 @@
 
 This repository houses the associated exercise files for the open course on PLC based automation developed at Tennessee Technological University.
 
-For information about each lab, refer to the associated text book in this repository. 
+For information about each lab, refer to the associated textbook. The book is available as a PDF at the author's website [here](https://www.jessetnroberts.com/files/Introduction_to_PLC_Automation.pdf).
 
 ## Exercises
 
