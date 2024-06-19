@@ -7,3 +7,19 @@ For information about each lab, refer to the associated text book in this reposi
 ## Exercises
 
 Each of the exercises/Labs described in the book has an associated PLC file (.acd) and HMI file (.apa) in the exercises folder.
+
+## Lecture Videos
+
+Each exercise is intended to be completed after having watched the associated lecture video. All lectures are available [here](https://www.youtube.com/watch?v=DroUeHOe4lw&list=PL08zDkmLSnzFXJt9FVlfNPbG_KlcI_Qck&pp=gAQBiAQB).
+
+# Suggested Citation
+
+This material is permitted to be copied, modified, and used with attribution. To attribute this material cite: 
+
+@book{Roberts_2024, 
+place={Cookeville, TN}, 
+edition={1}, 
+title={Introduction to PLC Automation}, 
+publisher={Self Publishers}, 
+author={Roberts, Jesse}, 
+year={2024}} 
