@@ -1,0 +1,279 @@
+\chapter{Lab 1}
+\setcounter{TASignatures}{0}
+\setcounter{AsideCounter}{0}
+
+\section{Introduction}
+    \vspace{0.1em}
+
+    \textbf{In this lab you gain experience with:}
+    \begin{enumerate}
+        \item Analyzing how a ladder logic program will execute
+        \item Using the output coil (OTE)
+        \item Using the normally closed contact (XIO)
+        \item Using the normally open contact (XIC)
+        \item Coding various logical problems
+    \end{enumerate}
+
+\subsection{Lab Files}
+
+Go to iLearn and download the PLC and HMI files for this lab to the PC. Then download the PLC project to the PLC and the HMI application to the HMI. 
+
+\subsection{Acceptable Instructions}
+
+You may have previous experience with PLCs and that is great! However, you are only allowed to use the instructions that we have covered thus far in the lab. So, if you have experience already, consider it a challenge to restrict yourself to only use the instructions that have been covered thus far in lecture to solve the problem!
+
+\subsection{How to Interface with the PLC and HMI}
+\begin{samepage}
+\noindent If you are unclear on any of the following, refer to the Lab 1 Manual:
+\begin{enumerate}
+    \item Download to the PLC
+    \item Go online with the PLC
+    \item Put the PLC into Run Mode
+    \item Make online and offline edits to the PLC program
+    \item Download to the HMI
+    \item Toggle a boolean tag
+\end{enumerate}
+
+\end{samepage}
+
+\subsection{How to get credit}
+Each lab after this will require each student to submit the completed pre-lab before they are allowed to begin working on the lab. The \textbf{pre-lab must be submitted to the TA before beginning work on the lab}. If it is not complete then you will be required to complete the pre-lab before you are allowed to begin working on the lab.
+
+In order to get credit for completing each part of this lab, \textbf{you must personally read and complete each portion of the lab and demonstrate the completion to the TA}. Each section has one or more signature slots that must be signed by the TA to confirm that the section was completed. Each section is worth equal credit. 
+
+\subsection{20 minute grace period}
+To receive full credit, the lab must be completed and demonstrated during the assigned lab time. However, if you cannot complete the lab within that time, you can complete and demonstrate the lab within the first 20 minutes of the subsequent lab time and still receive full credit. \textbf{If the lab is not completed within the assigned lab time and is not completed within the 20 minute grace period, then the lab is considered late}. If you submit the lab late, then there will be a 20\% deduction compounded weekly.
+
+
+\subsection{Lab agreement}
+
+The planning of a program is often a very social activity, however the actual writing of the code is always an individual pursuit. In this class it is very much the same. Students are welcome to verbally assist each other, but each person is required to write their own code and personally complete each lab. In this way each student will gain valuable experience with programming PLCs. 
+
+\textbf{The undersigned person guarantees that any and all work demonstrated to the TA in regard to this lab is a result of their own work with no unauthorized help.}
+
+\signatureSlot{Student (Print \& Sign)}
+
+
+\section{Storefront Door Controller}
+
+This section corresponds to the \verb|Lab1_1| object in the Lab1 PLC file.
+\\ 
+\\
+Picture it, you have just graduated and a local grocery store contacts you and asks if you would be willing to do some freelance engineering/programming work for them. The first thing they ask you to do is to make their automatic doors work. They hired a company to install the automatic door system but the contract was disputed and the company left the work unfinished.
+
+When you arrive at the store you find that the motor that opens the door is connected to an Allen Bradley PLC! You also find that the sensor used to detect the presence of a person in front of the door is also connected to the PLC. The PLC also gets a signal from the security system to know that the store is open for business. So, all that's left for you to do is program the PLC to control the signal that goes to the door.
+
+\subsection{How should the logic work?}
+
+Simple. Any time the store is open and someone is detected in front of the doors, then the doors should open.
+
+This logic in normal sequential programming would look something like that shown in \figureautorefname \ref{fig:2_1Sequential}
+
+\lstset{style=mystyle}
+\lstset{language=python}
+\begin{figure}[h]
+\begin{lstlisting}[firstnumber=1]
+if (Lab1_1.Store_Is_Open and
+        Lab1_1.Person_Present_At_Front_Of_Door):
+    Lab1_1.Open_The_Door = True
+else:
+    Lab1_1.Open_The_Door = False
+\end{lstlisting}
+\caption{Sequential logic similar to Lab1 part 1}
+\label{fig:2_1Sequential}
+\end{figure}
+
+\subsection{The Inputs and Outputs}
+
+To access any of the signals listed in \tableautorefname \ref{Table:Lab1_1Attributes}, use the syntax \verb|Lab1_1.| followed by the attribute name. 
+
+\begin{table}[h]
+\centering
+\caption{Attributes available in Lab1\textunderscore 1}
+\label{Table:Lab1_1Attributes}
+\begin{tabular}{c c c}
+\toprule
+Attribute Name & Data Type & Type\\
+\midrule
+\verb|Store_Is_Open| & Bool & Output \\
+\verb|Person_Present_At_Front_Of_Door| &  Bool & Output \\
+\midrule
+\verb|Open_The_Door| & Bool & Input\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Write the appropriate logic in the associated rung in the PLC file.
+
+\TASignatureSlot
+
+
+
+\section{Storefront Door Controller... again}
+
+This section corresponds to the \verb|Lab1_2| object in the Lab1 PLC file.
+\\ 
+\\
+When you left the grocery store, the door worked beautifully and your customer was very happy. However, after a few hours you receive a frantic phone call from the store manager asking you to return to the store because there was a problem with the doors!
+
+When you return to the store you find that the store is packed with people but they are all standing inside looking out the front door like a hoard of zombies! What could cause such a weird situation? Well, it seems that your door programming works well at letting people in but since the sensor used to detect people at the back of the door was never connected you did not think to add it. So, people can get in but no one can get out because the \verb|Person_Present_At_Front_Of_Door| signal doesn't work for people at the back of the door.
+
+\aside{The first automatic doors were designed by Heron of Alexandria in the first century AD! He made a mechanism driven by the heat from a fire that was kindled by priests in the temple to cause a water counter balance to open the temple door.}
+
+You quickly install the motion detection sensor used to detect the presence of a person at the back of the door and connect the sensor to the PLC. Now you have to rewrite your code!
+
+\subsection{How should the logic work?}
+
+If the store is open and a person is in front of the doors or in back of the doors, then the doors should be open.
+
+This logic in normal sequential programming would look something like that shown in \figureautorefname \ref{fig:2_2Sequential}
+
+\lstset{style=mystyle}
+\lstset{language=python}
+\begin{figure}[h]
+\begin{lstlisting}[firstnumber=1]
+
+if (Lab1_2.Store_Is_Open and
+        (Lab1_2.Person_Present_At_Front_Of_Door or
+        Lab1_2.Person_Present_At_Back_Of_Door)):
+    Lab1_2.Open_The_Door = True
+else:
+    Lab1_2.Open_The_Door = False
+    
+\end{lstlisting}
+\caption{Sequential logic similar to Lab1 part 2}
+\label{fig:2_2Sequential}
+\end{figure}
+
+\subsection{The Inputs and Outputs}
+
+To access any of the signals listed in \tableautorefname \ref{Table:Lab1_2Attributes}, use the syntax \verb|Lab1_2.| followed by the attribute name. 
+
+\begin{table}[h]
+\centering
+\caption{Attributes available in Lab1\textunderscore 2}
+\label{Table:Lab1_2Attributes}
+\begin{tabular}{c c c}
+\toprule
+Attribute Name & Data Type & Type\\
+\midrule
+\verb|Store_Is_Open| & Bool & Output \\
+\verb|Person_Present_At_Front_Of_Door| &  Bool & Output \\
+\verb|Person_Present_At_Back_Of_Door| &  Bool & Output \\
+\midrule
+\verb|Open_The_Door| & Bool & Input\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Write the appropriate logic in the associated rung in the PLC file.
+
+\TASignatureSlot
+
+
+\section{Sawmill controller}
+
+This section corresponds to the \verb|Lab1_3| object in the Lab1 PLC file.
+\\ 
+\\
+
+Word got out that you were a good programmer (even with the minor blunder with the zombie hoard at the grocery store). Pretty soon you are contacted by the owner of a sawmill that wants to replace the old relay system that currently controls the saw with a PLC based system.
+
+
+
+\subsection{How should the logic work?}
+
+The current system requires the saw operator press the start button to start the saw. But once the saw is running, it will remain running until the stop button is pressed. He wants the saw to work precisely the same way after you are done. 
+
+\aside{What the sawmill owner wants is referred to in ladder logic as a \textbf{seal-in}. It is a useful way of keeping a coil energized (on) once it has been turned on. This is a very important concept in PLC programming.}
+
+This logic in normal sequential programming would look something like that shown in \figureautorefname \ref{fig:2_3Sequential}
+
+\lstset{style=mystyle}
+\lstset{language=python}
+\begin{figure}[h]
+\begin{lstlisting}[firstnumber=1]
+
+if ((Lab1_3.Start_Saw or Lab1_3.Run_Saw) and 
+        not Lab1_3.Stop_Saw):
+    Lab1_3.Run_Saw = True
+else:
+    Lab1_3.Run_Saw = False
+    
+\end{lstlisting}
+\caption{Sequential logic similar to Lab1 part 3}
+\label{fig:2_3Sequential}
+\end{figure}
+
+\subsection{The Inputs and Outputs}
+
+To access any of the signals listed in \tableautorefname \ref{Table:Lab1_3Attributes}, use the syntax \verb|Lab1_3.| followed by the attribute name. 
+
+\begin{table}[h]
+\centering
+\caption{Attributes available in Lab1\textunderscore 3}
+\label{Table:Lab1_3Attributes}
+\begin{tabular}{c c c}
+\toprule
+Attribute Name & Data Type & Type\\
+\midrule
+\verb|Start_Saw| & Bool & Output \\
+\verb|Stop_Saw| &  Bool & Output \\
+\midrule
+\verb|Run_Saw| & Bool & Input\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Write the appropriate logic in the associated rung in the PLC file.
+
+\TASignatureSlot
+
+
+
+\section{Challenge}
+
+This section corresponds to the \verb|Lab1_4| object in the Lab1 PLC file.
+\\ 
+\\
+
+You decided that to get more publicity you would enter a PLC programming competition that sends out challenges once a week. If you win there's even a guaranteed job offer! This week the contest judges decided that each competitor must code a boolean formula into a single rung of ladder logic using only the normally closed contact, normally open contact, and the coil instructions. The formula that they have given is $D = \overline{((A+B)\cdot C\cdot A)}$. 
+
+The reason that this is challenging is because there is no good way to negate a group of logical operations in ladder logic in a single rung. The key is to use Demorgan's theorem to transform the boolean formula into one that \textbf{doesn't have any logical NOT operations applied to a group}. 
+
+\aside{In electrical engineering, the $+$ operator signifies a logical OR operation. The $\cdot$ operator is used to signify the logical AND operation. Lastly, the bar over top of an element(s) signifies the logical NOT operation.}
+
+\aside{Demorgan's theorem states that:
+\begin{align}
+\overline{(A\cdot B)} =& \overline A + \overline B \\
+\overline{(A + B)} =& \overline A\cdot \overline B
+\end{align}}
+
+\aside{This situation comes up often in industrial PLC applications. Before a robot is allowed to interface with a sub-section of a machine, the machine must be at rest (otherwise you risk damaging the machine). This typically involves making sure that a group of things are NOT true. Negating the group is ugly in ladder logic and it is typically better to apply Demorgan's theorem to get the boolean formula into a more manageable form.}
+
+\subsection{How should the logic work?}
+
+That's for you to figure out!
+
+\subsection{The Inputs and Outputs}
+
+To access any of the signals listed in \tableautorefname \ref{Table:Lab1_4Attributes}, use the syntax \verb|Lab1_4.| followed by the attribute name. 
+
+\begin{table}[h]
+\centering
+\caption{Attributes available in Lab1\textunderscore 4}
+\label{Table:Lab1_4Attributes}
+\begin{tabular}{c c c}
+\toprule
+Attribute Name & Data Type & Type\\
+\midrule
+\verb|A| & Bool & Output \\
+\verb|B| &  Bool & Output \\
+\verb|C| &  Bool & Output \\
+\midrule
+\verb|D| & Bool & Input\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\TASignatureSlot

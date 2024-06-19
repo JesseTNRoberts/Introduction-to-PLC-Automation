@@ -1,0 +1,280 @@
+\documentclass{book}
+
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+
+\graphicspath{{Images/}}
+
+
+\usepackage{csquotes}
+\usepackage{mdframed}
+
+\usepackage{listings}
+\usepackage{float}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{multirow}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.8}
+
+\usepackage{csquotes}
+\usepackage{mdframed}
+
+
+\newcommand{\signatureSlot}[1]{
+\vspace{3em}
+\begin{tabular}{r p{2in}}
+#1: & \hrulefill \\
+\end{tabular}
+\vspace{2em}}
+
+\newcommand{\TASignatureSlot}{
+\refstepcounter{TASignatures}
+\signatureSlot{TA Signature \arabic{TASignatures}}
+}
+\newcounter{TASignatures}
+
+
+
+
+%for including code in the document
+\usepackage{listings}
+\usepackage{xcolor}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+%Macro used to insert an aside into the lab manual
+\newcommand{\aside}[1]{
+\refstepcounter{AsideCounter}
+\begin{samepage}
+\begin{center}
+\begin{displayquote}
+\begin{mdframed}
+\textit{|Note \arabic{AsideCounter}| #1}
+\end{mdframed}
+\end{displayquote}
+\end{center}
+\end{samepage}
+}
+\newcounter{AsideCounter}
+
+\newcommand{\rungincondition}{rung-condition-in}
+\newcommand{\rungoutcondition}{rung-condition-out}
+
+\newcommand{\comment}[1]{}
+
+\renewcommand*{\figureautorefname}{Fig.}
+
+
+\newcommand{\us}{\textunderscore}
+
+\title{Introduction to PLC Automation}
+\newcommand{\booksubtitle}{Practical Excercises}
+\newcommand{\booklicense}{CC BY-SA 4.0}
+
+
+\author{Dr. Jesse Roberts}
+% Author subtitle could be a university or a geographical location, for example
+\newcommand{\authorsubtitle}{Cookeville, TN}
+
+% Create convenient commands \booktitle and \bookauthor
+\makeatletter
+\newcommand{\booktitle}{\@title}
+\newcommand{\bookauthor}{\@author}
+\makeatother
+
+
+% This utf8 declaration is not needed for versions of latex > 2018 but may
+% be helpful for older software. Eventually it may not be worth keeping.
+\usepackage[utf8]{inputenc}  
+\usepackage{fix-cm}  % this package allows large \fontsize
+\usepackage{tikz}    % this is for graphics. e.g. rectangle on title page
+\usepackage{amsmath} % Used by equations
+
+% The following dimensions specify 4.75" X 7.5" content on 6 3/8" by 9 1/4"
+% paper. The paper width and height can be tweaked as required and the content
+% should size to fit within the margins accordingly.
+%
+% The (inside) bindingoffset should be larger for books with more pages. Some
+% standard recommended sizes are .375in minimum up to 1in for 600+ page books.
+% Sizes .75in and .875in are also recommended roughly at 150 and 400 pages.
+\usepackage[bindingoffset=0.625in,
+            left=.5in, right=.5in,
+            top=.8125in, bottom=.9375in,
+            paperwidth=6.375in, paperheight=9.25in]{geometry}
+% Here is an alternative geometry for reading on letter size paper:
+% \usepackage[margin=.75in, paperwidth=8.5in, paperheight=11in]{geometry}
+
+\renewcommand{\contentsname}{Table of Contents} % default is {Contents}
+\usepackage{makeidx}
+\makeindex % Initialize an index so we can add entries with \index
+
+
+% Content Starts Here
+\begin{document}
+\frontmatter
+
+% % ---- Half Title Page ----
+% % current geometry will be restored after title page
+% \newgeometry{top=1.75in,bottom=.5in}
+% \begin{titlepage}
+% \begin{flushleft}
+
+% % Title
+% \textbf{\fontfamily{qcs}\fontsize{48}{54}\selectfont Introduction \\ to PLC \\ \vskip6pt Automation}
+
+% % Draw a line 4pt high
+% \par\noindent\rule{\textwidth}{4pt}\\
+
+% % Subtitle
+% % Shaded box from left to right. Text node is midway (centered).
+% \begin{tikzpicture}
+% \shade[bottom color=lightgray,top color=white]
+%     (0,0) rectangle (\textwidth, 1.5)
+%     node[midway] {\textbf{\large \textit{\booksubtitle}}};
+% \end{tikzpicture}
+
+% % Edition Number
+% \begin{flushright}
+% \Large First Edition
+% \end{flushright}
+
+% % \vspace{\fill}
+% \vspace{\fill}
+
+% \end{flushleft}
+% \end{titlepage}
+% \restoregeometry
+% % ---- End of Half Title Page ----
+
+
+% % No page numbers on the Frontispiece page
+% \thispagestyle{empty}
+
+
+% ---- Title Page ----
+% current geometry will be restored after title page
+\newgeometry{top=1.75in,bottom=.5in}
+\begin{titlepage}
+\begin{flushleft}
+
+% Title
+\textbf{\fontfamily{qcs}\fontsize{48}{54}\selectfont Introduction \\ to PLC \\ \vskip6pt Automation}
+
+% Draw a line 4pt high
+\par\noindent\rule{\textwidth}{4pt}\\
+
+% Shaded box from left to right with Subtitle
+% The text node is midway (centered).
+\begin{tikzpicture}
+\shade[bottom color=lightgray,top color=white]
+    (0,0) rectangle (\textwidth, 1.5)
+    node[midway] {\textbf{\large \textit{\booksubtitle}}};
+\end{tikzpicture}
+
+% Edition Number
+\begin{flushright}
+\Large First Edition
+\end{flushright}
+
+\vspace{\fill}
+
+% Author and Location
+\textbf{\large \bookauthor}\\[3.5pt]
+\textbf{\large \textit{\authorsubtitle}}
+
+\vspace{\fill}
+
+% Self Publishing Logo. Free to use: CC0 license.
+% The source file is book.svg. If you change the svg, you must then convert
+% it to pdf. There are many online and offline tools available to do that.
+\begin{center}
+\includegraphics{booksvg.pdf}\\[4pt]
+\fontfamily{lmtt}\small{Self Publishers Worldwide\\
+Seattle San Francisco New York\\
+London Paris Rome Beijing Barcelona}
+\end{center}
+
+\end{flushleft}
+\end{titlepage}
+\restoregeometry
+% ---- End of Title Page ----
+
+% Do not show page numbers on colophon page
+\thispagestyle{empty}
+
+\begin{flushleft}
+\vspace*{\fill}
+This book was typeset using \LaTeX{} software.\\
+\vspace{\fill}
+Copyright \textcopyright{} \the\year{}  \bookauthor\\
+License: \booklicense
+\end{flushleft}
+
+% A title page resets the page # to 1, but the second title page
+% was actually page 3. So add two to page counter.
+\addtocounter{page}{2}
+
+% The asterisk excludes chapter from the table of contents.
+\chapter*{Preface}
+
+This book is a collection of exercises that are based on real scenarios and problems frequently encountered in industrial automation. The exercises are intended to be completed after having watched the associated video lecture available \href{https://www.youtube.com/watch?v=DroUeHOe4lw&list=PL08zDkmLSnzFXJt9FVlfNPbG_KlcI_Qck&pp=gAQBiAQB}{here}. 
+
+Each exercise has an associated starter file. The collection of starter files can be found \href{https://github.com/JesseTNRoberts/Introduction-to-PLC-Automation/}{here}.
+
+The first chapter is first exercise in this book and details the process of downloading a program to the PLC and HMI and then performing edits to those programs. This chapter will likely need to be referred to at the beginning of many exercises. However, rather than repeating the instructions, readers are expected to refer to the first chapter (Lab 0) as necessary for download process details.
+
+% Three-level Table of Contents
+\setcounter{tocdepth}{3}
+\tableofcontents
+
+\mainmatter
+
+\input{Labs/Lab0}
+\input{Labs/PreLab1}
+\input{Labs/Lab1}
+\input{Labs/PreLab2}
+\input{Labs/Lab2}
+\input{Labs/PreLab3}
+\input{Labs/Lab3}
+\input{Labs/Prelab4_5}
+\input{Labs/Lab4_5}
+\input{Labs/Prelab6_7}
+\input{Labs/Lab6_7}
+\input{Labs/Prelab8_9}
+\input{Labs/Lab8_9}
+\input{Labs/Prelab10_11}
+\input{Labs/Lab10_11}
+\input{Labs/LabFinal}
+
+\backmatter
+\addcontentsline{toc}{chapter}{Index}
+\printindex
+\end{document}

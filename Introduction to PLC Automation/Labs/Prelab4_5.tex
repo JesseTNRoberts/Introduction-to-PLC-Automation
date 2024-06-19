@@ -1,0 +1,39 @@
+\chapter{Pre-Lab 4\&5}
+\setcounter{TASignatures}{0}
+\setcounter{AsideCounter}{0}
+
+\section{Introduction}
+
+Make sure to complete this pre-lab before your assigned lab time. You will not be allowed to begin working on your lab without having this complete.
+
+\textbf{The coming lab will be extended across two lab times. So, you will not have a pre-lab next week!}
+
+\section{Background}
+
+
+In the coming lab we will be using timer and counter instructions. Be sure that you have watched the associated lecture and understand how the timer and counter instructions work as well as what their associated TIMER and COUNTER structures contain.
+
+
+Each of the following problems are to be completed on paper. You are not expected to program these problems on PLC. You are expected to write neat ladder logic diagrams on paper.
+
+
+\section{Problem 1}
+
+Write the ladder logic necessary to implement a stopwatch in PLCfiddle. Submit your save URL for the PLC fiddle code in the ilearn submission folder. The stopwatch should have \verb|Start|, \verb|Pause|, and \verb|Reset| tags. The stopwatch must store the elapsed time in minutes and seconds in tags called \verb|Minutes| and \verb|Seconds| respectively. 
+
+The stop watch should begin to accumulate when \verb|Start| is True. \verb|Pause|  becoming True should cause the accumulation to be paused. If the \verb|Start| button becomes True while the time accumulation is paused should cause the accumulation to continue \textbf{without} resetting the already accumulated time. The \verb|Reset| tag should both stop the accumulation of time and reset the currently accumulated time.
+
+
+
+\section{Problem 2}
+
+Write the ladder logic necessary to debounce a signal called \verb|input| and submit your save URL for the plc Fiddle code on ilearn. Debouncing is the name given to the process of making sure that a \textit{raw} signal has not been erroneously pressed or that noise has not been misconstrued as an True value. 
+
+The approach is simple, use a TON timer (Called an On Delay Timer on PLC Fiddle) to detect when \verb|input| has been continuously True for 500ms.  When \verb|input| has been True for that period of time, turn on the signal \verb|input_debounced|. If \verb|input| changes from true to false, then \verb|input_debounced| should likewise change to false. 
+
+Hint: The TON instruction will turn the .DN bit to True only after the rung in condition has been True for an amount of time greater than or equal to the timer preset value (In PLC fiddle, the .DN bit is called the Q bit). PLC fiddle timer presets are in seconds rather than milliseconds.
+
+
+\section{Problem 3 - Read the Manual}
+
+Read the lab manual. Then write a paragraph about the content and expectations in the lab manual which will convince the grader that you have in fact read the complete lab manual.

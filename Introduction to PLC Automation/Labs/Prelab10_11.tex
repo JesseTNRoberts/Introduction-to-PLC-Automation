@@ -1,0 +1,39 @@
+\chapter{Pre-Lab 10\&11}
+\setcounter{TASignatures}{0}
+\setcounter{AsideCounter}{0}
+
+\section{Introduction}
+
+Make sure to complete this pre-lab before your assigned lab time. You will not be allowed to begin working on your lab without having this complete.
+
+\section{Background}
+
+
+In the coming lab you will be writing all the PLC logic and creating the HMI pages. Moreover, you will have to understand how state machines work as they will be used excessively in the coming labs.
+
+The coming lab will be extended across two lab times. So, you will not have a pre-lab next week!
+
+\section{Problem 1}
+
+Using the process outlined in the lecture for coding a state machine, create a state machine that will toggle the value of a boolean tag called \verb|toggle_me|. The state machine should cause the value stored in \verb|toggle_me| to change when a rising edge occurs in the value stored in the tag called \verb|change|. 
+
+Show each of the steps that are detailed in the lecture for programming a state machine.
+
+As a hint, I suggest having the following states:
+\begin{itemize}
+    \item[] \verb|toggleMeIsOff_waiting_for_change_On|
+    \item[] \verb|toggleMeIsOff_set_toggleMe_On|
+    \item[] \verb|toggleMeIsOn_waiting_for_change_Off|
+    \item[] \verb|toggleMeIsOn_waiting_for_change_On|
+    \item[] \verb|toggleMeIsOn_set_toggleMe_Off|
+    \item[] \verb|toggleMeIsOff_waiting_for_change_Off|
+\end{itemize}
+
+\section{Problem 2 - Read the Manual}
+
+Read the lab manual. Then write a paragraph about the content and expectations in the lab manual which will convince the grader that you have in fact read the complete lab manual.
+
+
+\section{Problem 3}
+
+In the coming lab there will be a stoplight problem. Draw the state machine diagram and list all states, inputs, and outputs for the stoplight problem.

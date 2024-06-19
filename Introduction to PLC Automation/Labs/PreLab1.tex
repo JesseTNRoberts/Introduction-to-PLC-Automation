@@ -1,0 +1,136 @@
+\chapter{Pre-Lab 1}
+\setcounter{TASignatures}{0}
+\setcounter{AsideCounter}{0}
+
+
+\section{Introduction}
+
+Make sure to complete this pre-lab before your assigned lab time. You will not be allowed to begin working on your lab without having this complete.
+
+
+
+Each of the following problems are to be completed on paper. You are not expected to program these problems on PLC. You are expected to write neat ladder logic diagrams on paper.
+
+
+
+\section{Problem 1}
+
+Convert the code shown in \figureautorefname \ref{fig:Problem1} to a rung of ladder logic.
+
+\lstset{style=mystyle}
+\lstset{language=python}
+\begin{figure}[h]
+\begin{lstlisting}[firstnumber=1]
+
+while(True){
+    if(Pallet_Present and not Station_In_Operation):
+        Sound_Alarm = True
+    else:
+        Sound_Alarm = False
+}
+    
+\end{lstlisting}
+\caption{Pre-lab problem 1}
+\label{fig:Problem1}
+\end{figure}
+
+
+\section{Problem 2}
+
+Convert the code shown in \figureautorefname \ref{fig:Problem2} to a rung of ladder logic.
+
+\lstset{style=mystyle}
+\lstset{language=python}
+\begin{figure}[h]
+\begin{lstlisting}[firstnumber=1]
+
+while(True){
+    if(not Robot_Home and 
+        (Door_Open or Person_In_Guard)):
+        E_Stop = True
+    else:
+        E_Stop = False
+}
+    
+\end{lstlisting}
+\caption{Pre-lab problem 2}
+\label{fig:Problem2}
+\end{figure}
+
+
+\section{Problem 3}
+
+Convert the code shown in \figureautorefname \ref{fig:Problem3} to a rung of ladder logic.
+
+\lstset{style=mystyle}
+\lstset{language=python}
+\begin{figure}[h]
+\begin{lstlisting}[firstnumber=1]
+
+while(True){
+    if(Station1_Home and Station2_Home
+        and (Station3_Home and Station4_Home
+        and (Station5_Home or Station6_Home))
+        or Bypassed):
+        Safe_To_Move = True
+    else:
+        Safe_To_Move = False
+}
+    
+\end{lstlisting}
+\caption{Pre-lab problem 3}
+\label{fig:Problem3}
+\end{figure}
+
+\section{Problem 4}
+
+In electrical engineering, the $+$ operator signifies a logical OR operation. The $\cdot$ operator is used to signify the logical AND operation. Lastly, the bar over top of an element(s) signifies the logical NOT operation.
+
+So, the boolean formula shown in \equationautorefname \ref{equ:lab} is functionally equivalent to the sequential logic shown in \figureautorefname \ref{fig:Problem4}.
+
+\begin{align}
+    \label{equ:lab}
+    D = \overline{((A+B)\cdot C\cdot A)}
+\end{align}
+
+
+\lstset{style=mystyle}
+\lstset{language=python}
+\begin{figure}[h]
+\begin{lstlisting}[firstnumber=1]
+
+while(True){
+    if(not ((A or B) and C and A)):
+        D = True
+    else:
+        D = False
+}
+    
+\end{lstlisting}
+\caption{Pre-lab problem 4}
+\label{fig:Problem4}
+\end{figure}
+
+Programming this in a single rung of ladder logic in a PLC would be a bit difficult however, because the entire formula is negated. So, we need a way to transform the formula so that the formula is not negated.  
+
+DeMorgan's theorem states the following property for boolean formulae:
+\begin{align}
+\overline{(A\cdot B)} =& \overline A + \overline B \\
+\overline{(A + B)} =& \overline A\cdot \overline B
+\end{align}
+
+Apply DeMorgan's theorem to transform \equationautorefname \ref{equ:lab} into a more ladder logic friendly format. 
+
+Using your transformed version of the formula, write the appropriate \textbf{single rung} of ladder logic to assign the tag $D$ the value true if \equationautorefname \ref{equ:lab} is true. Else, $D$ should be assigned the value false.
+
+\aside{To help you solve this, here is an example of DeMorgan's law used to transform a boolean formula. 
+\begin{align*}
+U &= \overline{(X\cdot (Y + Z))}  && \text{Original formula}\\  
+&= \overline X + \overline{(Y + Z)} && \text{DeMorgan's applied to outer parenth}\\
+&= \overline X + (\overline Y \cdot \overline Z)&& \text{DeMorgan's applied to inner parenth}
+\end{align*}
+}
+
+\section{Problem 5 - Read the Manual}
+
+Read the lab manual. Then write a paragraph about the content and expectations in the lab manual which will convince the grader that you have in fact read the complete lab manual.

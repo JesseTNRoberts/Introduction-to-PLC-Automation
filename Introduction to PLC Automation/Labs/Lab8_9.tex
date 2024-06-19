@@ -1,0 +1,91 @@
+\chapter{Lab 8\&9}
+\setcounter{TASignatures}{0}
+\setcounter{AsideCounter}{0}
+
+\section{Introduction}
+    \vspace{0.1em}
+
+    \textbf{In this lab you gain experience with:}
+    \begin{enumerate}
+        \item Developing HMI applications
+        \item Applying course material to a real world problem
+        \item Meeting functional software specification requirements
+        \item Exceeding HMI design expectations
+    \end{enumerate}
+
+\subsection{Lab Files}
+
+Go to iLearn and download the PLC and HMI files for this lab to the PC. Then download the PLC project to the PLC and the HMI application to the HMI. 
+
+\subsection{Acceptable Instructions}
+
+You may have previous experience with PLCs and that is great! However, you are only allowed to use the instructions that we have covered thus far in the lab. So, if you have experience already, consider it a challenge to restrict yourself to only use the instructions that have been covered thus far in lecture to solve the problem!
+
+\subsection{Lab agreement}
+
+The planning of a program is often a very social activity, however the actual writing of the code is always an individual pursuit. In this class it is very much the same. Students are welcome to verbally assist each other, but each person is required to write their own code and personally complete each lab. In this way each student will gain valuable experience with programming PLCs. 
+
+\textbf{The undersigned person guarantees that any and all work demonstrated to the TA in regard to this lab is a result of their own work with no unauthorized help.}
+
+\signatureSlot{Student}
+
+
+
+\section{Challenge - Break week}
+
+The challenge organizers decided to take some personal time off. So, there will be no challenge activity this week. It's a good thing too! You have a big contract coming up...
+
+
+
+\section{Wamapoke County Contract}
+(Notice that there is no associated object for this lab. You must create all the necessary tags and HMI objects to fulfill the requirements outlined in this exercise. Make sure that the HMI page you make looks \textit{very} professional.)
+\\
+
+While at an automation conference over the weekend, you met an interesting councilwoman from a small town in Indiana. Her name was Lesley Norpe (Or something like that). She was there looking to find someone to do some contract work for Wamapoke County, Indiana. She had heard positive things from your past customers and hired you on the spot. 
+
+They want you to build a custom pressure road tube machine that will be used in assessing traffic flow between the urban and rural parts of the county. If you aren't sure what pressure road tubes are, watch the lecture. 
+
+
+\subsection{Specifications for the Pressure Road Tube Machine}
+
+\aside{Assume that all vehicles which pass through Wamapoke County only have two axles.}
+
+\vskip1em
+The pressure road tube machine must provide the following status data on the HMI:
+\begin{enumerate}
+    \item Speed of most recent vehicle
+    \item Average speed of all vehicles sense the last reset
+    \item Total vehicles sense the last reset
+\end{enumerate}
+
+\vskip1em
+The pressure road tube machine HMI must allow the user to:
+\begin{enumerate}
+    \item Set the distance from tube 1 to tube 2
+    \item Reset all status data with a single button press
+\end{enumerate}
+
+\vskip1em
+The last thing that Wamapoke County has required is that the HMI be designed well. Specifically, they want all the required interface to be present (obviously), but they also want a nice depiction of a road with the pressure road tubes on the road. 
+
+Further, the pressure road tubes in the HMI depiction should be clickable so that Lesley can test the machine without installing the tubes. Therefore, the tubes on the HMI will need to be buttons that are connected to the tag in the PLC which notifies your logic that a car is on a tube. 
+
+\begin{samepage}
+\subsection{Hints}
+
+Problems like this are best attacked one step at a time. So, I would recommend the following decomposition:
+\vskip1em
+\begin{enumerate}
+    \item [\textit{Program Spec}] 1. Be sure that you understand the specifications for the functionality.
+    \item [\textit{Decomposition}] 2. Go through each of the required functions and create a list of steps that will be involved (ie. steps to count the number of vehicles, steps to reset all status data on button press).
+    \item [\textit{Bottom-up}] 3. Sketch out the ladder logic necessary to complete each of the smaller steps that you have listed.
+    \item [\textit{Implementation}] 4. Now that you have a fully developed plan, write the required ladder logic in the PLC.
+\end{enumerate}
+
+\vskip1em
+As a final hint, do not try to keep a history of past speeds to calculate the average. Rather, figure out a way to calculate the new average using the current average, the current total vehicles, and the new, most recent speed.
+
+\TASignatureSlot
+
+
+\end{samepage}

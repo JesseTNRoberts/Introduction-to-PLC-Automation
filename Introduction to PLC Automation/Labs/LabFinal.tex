@@ -1,0 +1,144 @@
+\chapter{Lab Final}
+\setcounter{TASignatures}{0}
+\setcounter{AsideCounter}{0}
+
+\section{Introduction}
+    \vspace{0.1em}
+
+    \textbf{In this lab you gain experience with:}
+    \begin{enumerate}
+        \item Applying course material to a real world problem
+        \item Meeting functional software specification requirements
+        \item HMI object visibility
+        \item HMI message display
+    \end{enumerate}
+
+\subsection{Lab Files}
+
+Go to iLearn and download the PLC and HMI files for this lab to the PC. Then download the PLC project to the PLC and the HMI application to the HMI. 
+
+\subsection{Acceptable Instructions}
+
+You may have previous experience with PLCs and that is great! However, you are only allowed to use the instructions that we have covered thus far in the lab. So, if you have experience already, consider it a challenge to restrict yourself to only use the instructions that have been covered thus far in lecture to solve the problem!
+
+\subsection{Lab agreement}
+
+The planning of a program is often a very social activity, however the actual writing of the code is always an individual pursuit. In this class it is very much the same. Students are welcome to verbally assist each other, but each person is required to write their own code and personally complete each lab. In this way each student will gain valuable experience with programming PLCs. 
+
+\textbf{The undersigned person guarantees that any and all work demonstrated to the TA in regard to this lab is a result of their own work with no unauthorized help.}
+
+
+\subsection{Time}
+
+Each student will have 110 minutes to complete the final. Completing the final in the time limit is not easy. It us meant to test how well each student has learned the course material and prepared for the final. Be careful to prioritize higher point value items to maximize your score!
+
+
+\subsection{Lab Final Grading}
+
+The lab final is different from the other labs throughout the semester. The lab counts as a single lab grade but is graded based on what portion of the lab you complete in this session. 
+
+Refer to the grading rubric section for details.
+
+\signatureSlot{Student}
+
+
+
+
+\section{Winnipeg Industrial}
+(Notice that there is no associated object for this lab. You must create all the necessary tags and HMI objects to fulfill the requirements outlined in this exercise. Make sure that the HMI page you make looks \textit{very} professional.)
+\\
+
+You have been contracted to program an industrial machine for Winnipeg Industrial. This machine is used to assemble the internal spline shaft in transmissions for certain American made vehicles. These shafts have several pieces that must be installed in a specific order. If the installation order is not correct, the transmission will fail.
+
+Remember the loop that is present in typical industrial machines. An industrial control system commands an output based on a program, which causes some actuation in the environment. Then an instrument will detect the change in the environment and relay the detected change to the PLC via an input. 
+
+Industrial machines that rely heavily on operator action are very common. The methodology used to program them is not very different than that used in automated machines. The primary difference is that a human operator will often act as the actuator and instrument. The PLC contains all the necessary instructions on how to assemble the product and shows the next instruction on the HMI screen. When the operator has completed the instructed action they press a button to signal the PLC. Then, the next command is displayed. In this way, the control system loop in the PLC is still sending commands via outputs and detecting the change in the world via inputs.
+
+Winnipeg Industrial wants you to have one location to display instructions to the operator. If the operator takes more than 10 seconds to complete an instruction, then the HMI should flash an indicator with a 50/50 duty cycle and a 1 second period to get the operators attention and prompt them to continue the process. The flashing should stop once the operator has completed the overdue instruction.
+
+When the operator has completed the instruction, they are to press a button on the HMI labeled \verb|ACKN| (short for acknowledge). The button should not be allowed to be pressed until the latest instruction has been visible for 1 second. Also, the next instruction should not be displayed until the button is released.
+
+Winnipeg Industrial also wants you to keep track of how many parts have been completed. They also want you to track the average cycle time (The length of time elapsed after the operator acknowledges the ready to begin question until the process is completed). The part completed count and the average cycle time should be displayed on the HMI.
+
+If any two consecutive cycles take more than 25 seconds to complete, set a boolean tag called \verb|manager_review| to true. This will tell the manager that they need to investigate the reason for the slow production. There should be a button on the HMI called manager login. When the button is pressed, the user should enter a code. If the code matches the manager's login code, an indicator showing state of \verb|manager_review| should be visible for 2 seconds. The manager login code is 7301863.
+
+There should also be a button on the HMI called reset. This button will reset the state of \verb|manager_review|, the completed parts count, and the average cycle time.
+
+Finally, all machines manufactured in the United States must have a category 0 stop mechanism. These are typically large red buttons labeled E-STOP. However, Winnipeg Industrial has applied to OSHA to receive a variance which allows them to have the E-STOP button on this machine be on the HMI. It is common to reset any running processes to an initial state when a category 0 stop occurs. So, you are required to have a red button on the HMI labeled E-STOP that will reset the instructions to the first step whenever it is pressed.
+
+\aside{A category 0 stop is an action that when taken will remove all motive force. So, all power is removed from electrically powered motors, air pressure is removed from all possible cylinders, and the machine is generally rendered inoperable and ``safe".}
+
+\subsection{List of instructions to assemble spline shaft}
+
+\begin{itemize}
+    \item Ready to begin?
+    \item Place spline shaft in shaft retention nest
+    \item Install pin bearing set 1
+    \item Install pin bearing set 2
+    \item Install clutch pack assembly
+    \item Install ball bearings
+    \item Install load plate
+    \item Install snap ring
+\end{itemize}
+
+When the process is complete and the operator has released the \verb|ACKN| button, return to the first instruction so that the operator can begin on the next cycle.
+
+
+\signatureSlot{TA Signature and Grade}
+
+\begin{samepage}
+\section{Grading Rubric}
+
+\begin{enumerate}
+    \item Make an attempt
+    \begin{itemize}
+        \item Everyone who shows up and tries gets these points (10 points)
+    \end{itemize}
+    
+    \item Place to display operator instructions
+    \begin{itemize}
+        \item Are all the instructions displayed correctly and in the correct order consistently? (20 points)
+    \end{itemize}
+    
+    \item Blinking indicator for taking too long to complete a step 
+    \begin{itemize}
+        \item Does the blink begin after 10 seconds? (4 points)
+        \item Does the blink stop after the current instruction is complete? (3 points)
+        \item Does it work for each of the instructions? (3 points)
+    \end{itemize}
+    
+    \item \verb|ACKN| button
+    \begin{itemize}
+        \item Is the button only usable after 1 second? (3 points)
+        \item Does the next instruction appear after releasing the button? (7 points)
+    \end{itemize}
+    
+    \item E-STOP Button
+    \begin{itemize}
+        \item Does this button reset the process so that the first instruction is displayed? (10 points)
+    \end{itemize}
+    
+    \item Completed parts count
+    \begin{itemize}
+        \item Does this correctly keep count of the number of completed parts? (10 points)
+    \end{itemize}
+    
+    \item Average cycle time
+    \begin{itemize}
+        \item Is the average cycle time calculated and displayed correctly? (10 points)
+    \end{itemize}
+    
+    \item Reset Button
+    \begin{itemize}
+        \item Does the reset button correctly reset the average cycle time and the completed parts count? (10 points)
+    \end{itemize}
+    
+    \item Manager login and \verb|Manager_Review| indicator (hidden until manager login)
+    \begin{itemize}
+        \item Does the \verb|Manager_Review| tag correctly get set if two consecutive cycle times are longer than 25 seconds? (5 points)
+        \item Is the \verb|Manager_Review| display indicator hidden until the manager logs in with the code? (3 points)
+        \item Does the \verb|Manager_Review| display disappear after 2 seconds? (2 points)
+    \end{itemize}
+    
+\end{enumerate}
+\end{samepage}
